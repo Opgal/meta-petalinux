@@ -20,7 +20,6 @@ TOOLCHAIN_HOST_TASK += "\
 	nativesdk-gnupg \
 	nativesdk-bzip2 \
 	nativesdk-xz \
-	nativesdk-cpio \
 	nativesdk-file \
 	nativesdk-patch \
 	nativesdk-kconfig-frontends \
