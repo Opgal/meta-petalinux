@@ -8,17 +8,18 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://../LICENSE.md;beginline=1;endline=21;md5=17b8e1d4035e928378878301dbf1d92c"
 
 
-SRC_URI = "git://github.com/Xilinx/pmtool.git;protocol=https;branch=master \
+SRC_URI = "git://github.com/Xilinx/system-controller-pmtool.git;protocol=https;branch=xlnx_rel_v2021.2 \
                                file://LICENSE.md \
 		               file://pmtool.conf \
                   "
 
-SRCREV = "d3ba55803e3bebbf6cc0c4ef0bab7c15e151c0db"
+SRCREV = "9d0cc459dc4b3bbf283fb8dbc6bbaaaec6d2cb34"
 
 S = "${WORKDIR}/git"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE_vck-sc = "${MACHINE}"
+COMPATIBLE_MACHINE_vpk-sc = "${MACHINE}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 do_configure[noexec]="1"

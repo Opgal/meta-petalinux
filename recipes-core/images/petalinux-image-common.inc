@@ -29,9 +29,12 @@ IMAGE_INSTALL = " \
     ${CORE_IMAGE_EXTRA_INSTALL} \
     "
 
-COMMON_INSTALL_append_zynqmp = " ${INSTALL_ZYNQ_ZYNQMP_VERSAL} hellopm libdfx"
+# If meta-xilinx-tools is available, require libdfx
+LIBDFX_RECIPE = "${@'libdfx' if 'xilinx-tools' in d.getVar('BBFILE_COLLECTIONS').split() else ''}"
+
+COMMON_INSTALL_append_zynqmp = " ${INSTALL_ZYNQ_ZYNQMP_VERSAL} hellopm ${LIBDFX_RECIPE}"
 COMMON_INSTALL_append_zynq = " ${INSTALL_ZYNQ_ZYNQMP_VERSAL}"
-COMMON_INSTALL_append_versal = " ${INSTALL_ZYNQ_ZYNQMP_VERSAL} libdfx"
+COMMON_INSTALL_append_versal = " ${INSTALL_ZYNQ_ZYNQMP_VERSAL} ${LIBDFX_RECIPE}"
 
 INSTALL_ZYNQ_ZYNQMP_VERSAL = " haveged htop iperf3 meson u-boot-tools"
 
@@ -103,11 +106,7 @@ FEATURE_PACKAGES_petalinux-pynq-helloworld[optional] ?= "1"
 FEATURE_PACKAGES_petalinux-scweb ?= "packagegroup-petalinux-scweb"
 FEATURE_PACKAGES_petalinux-scweb[optional] ?= "1"
 
-# Vitis AI is only built for zynqmp at this time, but allow
-# the FEATURE_PACKAGES to not error on no zynqmp systems
-VITISAI_PKGS = ""
-VITISAI_PKGS_zynqmp = "packagegroup-petalinux-vitisai"
-FEATURE_PACKAGES_petalinux-vitisai ?= "${VITISAI_PKGS}"
+FEATURE_PACKAGES_petalinux-vitisai ?= "packagegroup-petalinux-vitisai"
 FEATURE_PACKAGES_petalinux-vitisai[optional] ?= "1"
 
 FEATURE_PACKAGES_petalinux-ocicontainers ?= "packagegroup-petalinux-ocicontainers"
